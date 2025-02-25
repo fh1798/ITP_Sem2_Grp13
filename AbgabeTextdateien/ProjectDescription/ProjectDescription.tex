@@ -1,0 +1,98 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[a4paper,top=3cm,left=3cm,right=2.5cm]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage[naustrian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,enumerate}
+\usepackage[donotfixamsmathbugs]{mathtools}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{mdframed}
+\usepackage{bm}			% für fette symbole in math mode
+\usepackage{dsfont}
+
+
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+
+\setlength\parindent{0pt}	
+
+\newcommand{\ra}{\ensuremath{\rightarrow}}
+\newcommand{\Ra}{\ensuremath{\Rightarrow}}
+\newcommand{\la}{\ensuremath{\leftarrow}}
+\newcommand{\lra}{\ensuremath{\Longleftrightarrow}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\newcommand{\makealine}{\medskip \noindent\makebox[\linewidth]{\rule{\linewidth}{0.4pt}}}
+
+\newcommand{\Th}[1]{\ensuremath{\Theta(#1)}}
+\newcommand{\bigO}[1]{\ensuremath{O(#1)}}
+\newcommand{\Om}[1]{\ensuremath{\Omega(#1)}}
+
+\newcounter{Exernumb}
+\newenvironment{exercise}%			% [1] einfügen falls Name dabei sein soll
+   {\stepcounter{Exernumb}\vspace{1em}%
+    \bigskip
+    \noindent
+    \textbf{Aufgabe \theExernumb. }%	% (#1) einfügen falls Name dabei sein soll
+    \medskip
+    \normalfont
+   }%
+   {\makealine
+   }
+\newenvironment{subexercises}%
+   {\begin{enumerate}[(a)]}%
+   {\end{enumerate}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Project application - IT Project}
+%\subtitle{ 186.866 Algorithmen und Datenstrukturen VU 8.0}
+\subject{Study year: SS 2024 \\ Semester: 2}
+\author{Harich, Franziska (11707259) \\ e11707259@student.tuwien.ac.at}
+%\date{xx. MÃ¤rz xxxx}
+
+\automark{section}
+\makeatletter
+\chead{2.~\"Ubungsblatt Algodat (SS 2020) -- Harich, Franziska (11707259)} % alternativ: \@author} aber hier email Adresse zu viel
+\makeatother
+\cfoot{\pagemark}
+
+\begin{document}
+\maketitle
+
+%\section*{Name der Section}.  %% Section einfügen falls notwendig
+
+
+%% AUFGABE 1
+
+\begin{exercise}\label{ex:1} 
+\begin{subexercises}
+	
+	\item %% a
+	
+	\item %% b
+
+\end{subexercises}
+\end{exercise}
+ 
+ 
+
+
+
+%\begin{figure}[H]
+%    % Mit der folgenden Zeile kann eine Grafik eingebunden werden
+%
+%    % \centering\includegraphics[angle=90,width=\textwidth]{IMAGEHERE}
+%    \caption{L\"osung zu Aufgabe~\ref{ex:ER}} 
+%    \label{fig:ER-sol}
+%  \end{figure}
+
+
+\end{document}
+
