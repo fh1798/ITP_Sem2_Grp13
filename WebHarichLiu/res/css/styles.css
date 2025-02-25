@@ -1,0 +1,235 @@
+/* Hier werden jegliche Style-Anpassungen für das gesamte Projekt vorgenommen. */
+* {
+  box-sizing: border-box;
+}
+
+  :root {
+    --bs-blue: #0d6efd;
+    --bs-indigo: #6610f2;
+    --bs-purple: #6f42c1;
+    --bs-pink: #d63384;
+    --bs-red: #dc3545;
+    --bs-orange: #fd7e14;
+    --bs-yellow: #ffc107;
+    --bs-gold:#b99446;
+    --bs-brown:#a27645;
+    --bs-green: #198754;
+    --bs-teal: #20c997;
+    --bs-cyan: #0dcaf0;
+    --bs-white: #fff;
+    --bs-gray: #a8a9ab;
+    --bs-gray-dark: #343a40;
+    --bs-primary: #b99148;
+    --bs-secondary: #6c757d;
+    --bs-success: #875919;
+    --bs-info: #0dcaf0;
+    --bs-warning: #e77a14;
+    --bs-danger: #850b17;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  }
+
+  .bg-primary{
+    background-color: var(--bs-primary) !important;
+  }
+
+  .btn-primary {
+    color: #fff;
+    background-color: var(--bs-brown);
+    border-color: var(--bs-primary);
+  }
+  
+  .btn-custom {
+    width: 100% !important; /* Einheitliche Breite */
+    max-width: 150px !important; /* Maximale Breite */
+    padding: 10px !important; /* Einheitlicher Innenabstand */
+    font-size: 14px !important; /* Einheitliche Schriftgröße */
+    text-align: center !important; /* Textausrichtung */
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: var(--bs-font-sans-serif);
+  
+}
+
+.hero{
+  background-image: url("../assets/img/hero.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 100vh;
+  
+}
+
+/*overlay erzeugen*/
+
+.hero::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 1;
+}
+
+.hero-content{
+  
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+
+  transform:translate(-50%, 0);
+  text-align: center;
+  z-index: 2;
+  
+}
+
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+/*index*/
+
+/* The hero image */
+
+/*index ende*/
+
+/*login*/
+.container_login, .container_register{
+
+margin-top: 20px;
+padding-bottom: 30px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+
+
+}
+.container_form{
+  width: 70%;
+  height: fit-content;
+  
+  margin: 0 auto;
+  padding-left: 20px;
+  background-color: #caa369;
+ 
+
+
+}
+
+.container_form input[type="text"]
+
+ {
+  width:60%;
+  margin-right:10px;
+  display: block;
+  height:50px;
+  
+}
+
+.container_form input[type="radio"],
+.container_form input[type="checkbox"]
+{
+  width:auto;
+  margin-right:10px;
+
+}
+
+.container_form input[type="password"],
+.container_form input[type="email"]{
+
+  width:60%;
+  margin-right:10px;
+  display: block;
+  height: 50px;
+ 
+}
+
+/*kontakt.php*/
+
+.contact_section_index{
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
+  text-align: center;
+  height: 100vh;
+}
+
+.contact_section_index h2{
+  
+  font-size: 2em;
+}
+
+.section_contact{
+    border: 2px solid #ccc; /* Umrandung hinzufügen */
+    border-radius: 8px; /* Abgerundete Ecken */
+    padding: 20px; /* Innenabstand */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Schatten für Tiefe */
+    width: 400px; /* Breite der Box */
+   
+    position: center;
+    display: flex;
+    justify-content: center;
+    background-color: #ddd;
+}
+
+.container_contact{
+ 
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  
+    box-sizing: 400px;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  margin-top: 1em;
+  background-color: #d0a63d;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #e0b24e;
+}
+
+
+/*error-message*/
+.error{
+  margin-left: 10px;
+}
