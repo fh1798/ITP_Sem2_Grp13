@@ -1,6 +1,4 @@
-
 <body>
-
     <!--- Hero-Section -->
     <div class="min-vh-100 d-flex justify-content-center align-items-center flex-column text-white"
         style="background-image: url('images/hero.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover">
@@ -137,4 +135,3 @@
     <!-- script hinzugefügt damit Carousel funktioniert -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
