@@ -3,7 +3,7 @@
     <div class="min-vh-100 d-flex justify-content-center align-items-center flex-column text-white"
         style="background-image: url('./assets/images/hero.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover">
         <div class="text-center">
-            <h1 class="display-3 fw-bolder mb-3">Wir sind Motino</h1>
+            <h1 class="display-3 fw-bolder mb-3">Wir sind Perfumia Duftwelt</h1>
             <p class="fs-3 fw-light">Erlebe den Zauber des Duftes</p>
         </div>
     </div>
