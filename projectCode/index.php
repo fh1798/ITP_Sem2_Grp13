@@ -14,8 +14,10 @@
             break;
         case "faq":
             include("includes/sites/faq.php");
+            break;
         case "impressum":
             include("includes/sites/impressum.php");
+            break;
     }
 
     include("includes/basicElements/footer.php");
