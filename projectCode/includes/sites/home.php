@@ -1,7 +1,7 @@
 <body>
     <!--- Hero-Section -->
     <div class="min-vh-100 d-flex justify-content-center align-items-center flex-column text-white"
-        style="background-image: url('images/hero.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover">
+        style="background-image: url('./assets/images/hero.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover">
         <div class="text-center">
             <h1 class="display-3 fw-bolder mb-3">Wir sind Motino</h1>
             <p class="fs-3 fw-light">Erlebe den Zauber des Duftes</p>
@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row gy-4 align-items-center">
                 <div class="col-12 col-lg-6">
-                    <img class="img-fluid rounded shadow" loading="lazy" src="images/about.jpg" alt="About Motino">
+                    <img class="img-fluid rounded shadow" loading="lazy" src="./assets/images/about.jpg" alt="About Motino">
                 </div>
                 <div class="col-12 col-lg-6">
                     <h2 class="display-5 fw-bold mb-3">Über uns</h2>
@@ -68,7 +68,7 @@
                     <div class="carousel-item active">
                         <div class="d-flex justify-content-center">
                             <div class="text-center px-3" style="max-width: 700px;">
-                                <img src="images/person1.jpg" class="rounded-circle mb-3 shadow" alt="client 1" height="100" width="100">
+                                <img src="./assets/images/person1.jpg" class="rounded-circle mb-3 shadow" alt="client 1" height="100" width="100">
                                 <h3 class="fs-4 fw-bold mb-2">Thomas Schuhmacher</h3>
                                 <p class="mb-3">
                                     <i class="bi bi-star-fill" style="color: #EBF728;"></i>
@@ -86,7 +86,7 @@
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center">
                             <div class="text-center px-3" style="max-width: 700px;">
-                                <img src="images/person2.jpg" class="rounded-circle mb-3 shadow" alt="client 2" height="100" width="100">
+                                <img src="./assets/images/person2.jpg" class="rounded-circle mb-3 shadow" alt="client 2" height="100" width="100">
                                 <h3 class="fs-4 fw-bold mb-2">Stefan Bauer</h3>
                                 <p class="mb-3">
                                     <i class="bi bi-star-fill" style="color: #EBF728;"></i>
@@ -104,7 +104,7 @@
                     <div class="carousel-item">
                         <div class="d-flex justify-content-center">
                             <div class="text-center px-3" style="max-width: 700px;">
-                                <img src="images/person3.jpg" class="rounded-circle mb-3 shadow" alt="client 3" height="100" width="100">
+                                <img src="./assets/images/person3.jpg" class="rounded-circle mb-3 shadow" alt="client 3" height="100" width="100">
                                 <h3 class="fs-4 fw-bold mb-2">Hansi Flick</h3>
                                 <p class="mb-3">
                                     <i class="bi bi-star-fill" style="color: #EBF728;"></i>
