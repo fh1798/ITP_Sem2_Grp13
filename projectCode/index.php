@@ -18,6 +18,9 @@
         case "impressum":
             include("includes/sites/impressum.php");
             break;
+        default:
+            include("includes/sites/default.php");
+            break;
     }
 
     include("includes/basicElements/footer.php");
