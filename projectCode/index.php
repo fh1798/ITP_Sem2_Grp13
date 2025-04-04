@@ -1,7 +1,7 @@
 <?php
     // Für Sprint 2
-    //require_once("config/session.php");
-    //require_once("config/dbaccess.php");
+    require_once("config/session.php");
+    require_once("config/dbaccess.php");
 
     $page = $_GET["page"] ?? "home";
 
@@ -22,6 +22,5 @@
             include("includes/sites/default.php");
             break;
     }
-
     include("includes/basicElements/footer.php");
 ?>
