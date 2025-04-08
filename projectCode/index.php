@@ -18,6 +18,12 @@
         case "impressum":
             include("includes/sites/impressum.php");
             break;
+        case "artikelübersicht":
+            include("includes/sites/artikelübersicht.php");
+            break;
+        case "artikeldetailansicht":
+            include("includes/sites/artikeldetailansicht.php");
+            break;
         default:
             include("includes/sites/default.php");
             break;

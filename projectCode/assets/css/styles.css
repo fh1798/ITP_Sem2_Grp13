@@ -1,0 +1,23 @@
+.product-placeholder {
+    width: 100%;
+    max-width: 450px;
+    height: 600px;
+    border: 2px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #999;
+    background-color: #f9f9f9;
+    margin: auto;
+}
+.tab-content {
+    margin-top: 20px;
+}
+.tab-pane ul {
+    padding-left: 1rem;
+}
+.card-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit;        /* Inherit the color from the card */
+}

@@ -1,4 +1,4 @@
-<div class="container" style="padding: 20px;">
+<div class="container vh-100" style="padding: 20px;">
     <h2>Häufig gestellte Fragen (FAQ)</h2>
 
     <h4>Welche Marken bietet ihr an?</h4>

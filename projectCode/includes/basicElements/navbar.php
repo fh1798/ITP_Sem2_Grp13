@@ -15,6 +15,9 @@
         <li class="nav-item">
           <a class="nav-link  <?php if($page === "impressum") echo "active"; ?>" href="index.php?page=impressum">Impressum</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link  <?php if($page === "artikelübersicht") echo "active"; ?>" href="index.php?page=artikelübersicht">Artikel</a>
+        </li>
       </ul>
 
       <!-- Login/Logout for Sprint 2-->
