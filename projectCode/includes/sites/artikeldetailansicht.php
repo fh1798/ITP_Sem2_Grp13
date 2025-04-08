@@ -1,0 +1,154 @@
+<?php
+// Get um artikelID aus URL zu bekommen
+$artikelID = isset($_GET['artikelID']) ? $_GET['artikelID'] : null;
+
+// Falls artikelId nicht exestiert
+if (!$artikelID) {
+    echo "Produkt nicht gefunden.";
+    exit;
+}
+
+// Query für die Core-Artikel-Elemente
+$sql = "SELECT 
+            a.artikelId, 
+            a.name, 
+            a.artikelBildSrc,
+            a.ml,
+            a.markeFK,
+            a.beschreibung, 
+            p.preisNetto, 
+            s.steuersatz,
+            m.name AS markeName
+        FROM artikel a
+        LEFT JOIN preisliste p ON a.artikelID = p.artikelID
+        LEFT JOIN steuersatz s ON p.steuersatzID = s.steuersatzID
+        LEFT JOIN marke m ON a.markeFK = m.markeID
+        WHERE a.artikelId = ?";
+        
+$stmt = $db_obj->prepare($sql);
+$stmt->bind_param("i", $artikelID);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Fetch the product data
+$product = $result->fetch_assoc();
+
+// If the product doesn't exist, show an error message
+if (!$product) {
+    header('Location: index.php?page=default');
+}
+
+// Eigene Query für duftnoten
+$sqlNotes = "SELECT 
+                dn.name AS duftnoteName,
+                dn.typ AS duftnoteTyp
+            FROM artikelduftnoten ad
+            JOIN duftnote dn ON ad.duftnoteId = dn.duftnoteId
+            WHERE ad.artikelId = ?";
+
+$stmtNotes = $db_obj->prepare($sqlNotes);
+$stmtNotes->bind_param("i", $artikelID);
+$stmtNotes->execute();
+$resultNotes = $stmtNotes->get_result();
+
+// Initialize duftnoten arrays
+$kopfnote = [];
+$herznote = [];
+$basisnote = [];
+
+// Fetch duftnoten
+while ($note = $resultNotes->fetch_assoc()) {
+    if ($note['duftnoteTyp'] == 'Kopfnote') {
+        $kopfnote[] = $note['duftnoteName'];
+    } elseif ($note['duftnoteTyp'] == 'Herznote') {
+        $herznote[] = $note['duftnoteName'];
+    } elseif ($note['duftnoteTyp'] == 'Basisnote') {
+        $basisnote[] = $note['duftnoteName'];
+    }
+}
+
+// Eigene Query für inhaltsstoffe
+$sqlIngredients = "SELECT 
+                    i.inhaltsstoff
+                  FROM artikelinhaltsstoffe ai
+                  JOIN inhaltsstoffe i ON ai.inhaltID = i.inhaltID
+                  WHERE ai.artikelId = ?";
+
+$stmtIngredients = $db_obj->prepare($sqlIngredients);
+$stmtIngredients->bind_param("i", $artikelID);
+$stmtIngredients->execute();
+$resultIngredients = $stmtIngredients->get_result();
+
+// Initialize inhaltsstoffe array
+$ingredients = [];
+
+// Fetch all inhaltsstoffe
+while ($ingredient = $resultIngredients->fetch_assoc()) {
+    $ingredients[] = $ingredient['inhaltsstoff'];
+}
+?>
+
+<div class="container py-5 vh-100">
+  <div class="row">
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <div class="product-placeholder">
+        <!-- Artikel Bild -->
+        <img src="<?php echo htmlspecialchars($product['artikelBildSrc']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="img-fluid" />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <!-- Artikel Name und Beschreibung -->
+      <h2><?php echo htmlspecialchars($product['markeName']) . " - " . htmlspecialchars($product['name']); ?></h2>
+      <p class="text-muted"><?php echo htmlspecialchars($product['beschreibung']); ?></p>
+
+      <h4 class="text-success mb-3" id="price"><?php echo number_format($product['preisNetto'] * (1 + $product['steuersatz']), 2, ',', '.'); ?> € (inkl. MwSt.)</h4>
+
+      <!-- Tabs mit Inhaltbeschreibungen -->
+      <ul class="nav nav-tabs" id="productTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="produktdetails-tab" data-bs-toggle="tab" data-bs-target="#produktdetails" type="button" role="tab">Produktdetails</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="inhaltsstoffe-tab" data-bs-toggle="tab" data-bs-target="#inhaltsstoffe" type="button" role="tab">Inhaltsstoffe</button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="productTabContent">
+        <div class="tab-pane fade show active" id="produktdetails" role="tabpanel">
+          <ul>
+            <li><strong>Art-Nr.:</strong> <?php echo htmlspecialchars($product['artikelId']); ?></li>
+            <?php if (isset($product['ml']) && !empty($product['ml'])): ?>
+              <li><strong>Inhalt:</strong> <?php echo htmlspecialchars($product['ml']); ?> ml</li>
+            <?php endif; ?>
+            
+            <!-- Duftnoten -->
+            <?php if (!empty($kopfnote)): ?>
+              <li><strong>Kopfnote:</strong> <?php echo implode(', ', $kopfnote); ?></li>
+            <?php endif; ?>
+            <?php if (!empty($herznote)): ?>
+              <li><strong>Herznote:</strong> <?php echo implode(', ', $herznote); ?></li>
+            <?php endif; ?>
+            <?php if (!empty($basisnote)): ?>
+              <li><strong>Basisnote:</strong> <?php echo implode(', ', $basisnote); ?></li>
+            <?php endif; ?>
+          </ul>
+        </div>
+        <!-- Inhaltsstoffe -->
+        <div class="tab-pane fade" id="inhaltsstoffe" role="tabpanel">
+          <ul>
+            <?php if (!empty($ingredients)): ?>
+              <?php foreach ($ingredients as $ingredient): ?>
+                <li><?php echo htmlspecialchars($ingredient); ?></li>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <li>Keine Inhaltsstoffe verfügbar</li>
+            <?php endif; ?>
+          </ul>
+        </div>
+      </div>
+
+      <button class="btn btn-primary mt-4">In den Warenkorb</button>
+    </div>
+  </div>
+</div>
