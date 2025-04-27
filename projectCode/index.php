@@ -24,6 +24,12 @@
         case "artikeldetailansicht":
             include("includes/sites/artikeldetailansicht.php");
             break;
+        case "register":
+                include("includes/sites/register.php");
+                break;
+        case "login":
+                    include("includes/sites/login.php");
+                    break;
         default:
             include("includes/sites/default.php");
             break;

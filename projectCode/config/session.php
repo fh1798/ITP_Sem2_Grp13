@@ -13,8 +13,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 #  prüfen, ob jemand eingeloggt ist, und wenn ja, den Willkommensbutton in der navbar anzeigen
-if (isset($_SESSION['role']) || isset($_SESSION['username'])) {
-    $welcomeMessage = isset($_SESSION['username']) ? "Willkommen, " . $_SESSION['username'] . "!" : "Willkommen, Gast!";
+if (isset($_SESSION['role']) || isset($_SESSION['vorname'])) {
+    $welcomeMessage = isset($_SESSION['vorname']) ? "Willkommen, " . $_SESSION['vorname'] . "!" : "Willkommen, Gast!";
     $loggedIn = true;
 } if (!isset($_SESSION['role'])) {
     $_SESSION['role'] = 'anonym';

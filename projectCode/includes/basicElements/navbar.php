@@ -18,6 +18,12 @@
         <li class="nav-item">
           <a class="nav-link  <?php if($page === "artikelübersicht") echo "active"; ?>" href="index.php?page=artikelübersicht">Artikel</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link  <?php if($page === "register") echo "active"; ?>" href="index.php?page=register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  <?php if($page === "login") echo "active"; ?>" href="index.php?page=login">Login</a>
+        </li>
       </ul>
 
       <!-- Login/Logout for Sprint 2-->
