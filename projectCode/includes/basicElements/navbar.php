@@ -7,27 +7,35 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link  <?php if($page === "home") echo "active"; ?>" href="index.php?page=home">Home</a>
+          <a class="nav-link <?php if($page === "home") echo "active"; ?>" href="index.php?page=home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  <?php if($page === "faq") echo "active"; ?>" href="index.php?page=faq">FAQs</a>
+          <a class="nav-link <?php if($page === "faq") echo "active"; ?>" href="index.php?page=faq">FAQs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  <?php if($page === "impressum") echo "active"; ?>" href="index.php?page=impressum">Impressum</a>
+          <a class="nav-link <?php if($page === "impressum") echo "active"; ?>" href="index.php?page=impressum">Impressum</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  <?php if($page === "artikelübersicht") echo "active"; ?>" href="index.php?page=artikelübersicht">Artikel</a>
+          <a class="nav-link <?php if($page === "artikelübersicht") echo "active"; ?>" href="index.php?page=artikelübersicht">Artikel</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link  <?php if($page === "register") echo "active"; ?>" href="index.php?page=register">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link  <?php if($page === "login") echo "active"; ?>" href="index.php?page=login">Login</a>
-        </li>
+        <?php if(!isset($_SESSION['benutzerID'])): ?>
+          <li class="nav-item">
+            <a class="nav-link <?php if($page === "register") echo "active"; ?>" href="index.php?page=register">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?php if($page === "login") echo "active"; ?>" href="index.php?page=login">Login</a>
+          </li>
+        <?php endif; ?>
       </ul>
-
-      <!-- Login/Logout for Sprint 2-->
-      
+      <!-- Login/Logout Status -->
+      <div class="d-flex">
+        <?php if(isset($_SESSION['benutzerID'])): ?>
+          <span class="navbar-text me-3">
+            Willkommen, <?php echo htmlspecialchars($_SESSION['vorname']); ?>!
+          </span>
+          <a href="index.php?page=logout" class="btn btn-outline-danger">Logout</a>
+        <?php endif; ?>
+      </div>
     </div>
   </div>
 </nav>

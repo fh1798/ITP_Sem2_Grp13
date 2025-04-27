@@ -74,17 +74,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    
   <!-- Formular -->
   <form class="container border rounded bg-grey border-shadow py-5 my-5" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?page=login">
-    <div class="mb-3">
-      <label for="email" class="form-label">E-Mail-Adresse</label>
-      <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($email) ? $email : ''; ?>" required>
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Passwort</label>
-      <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-    <div class="mt-3">
-      <p>Noch kein Konto? <a href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?page=register">Jetzt registrieren</a></p>
-    </div>
+        <form>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-Mail-Adresse</label>
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Passwort</label>
+                <input type="password" class="form-control" id="password" placeholder="********">
+            </div>
+            
+                <button type="submit" class="btn btn-primary">Einloggen</button>
+            
+            <div class="mt-3">
+              <p>Noch kein Konto? <a href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?page=register">Jetzt registrieren</a></p>
+            </div>
   </form>
 </div>

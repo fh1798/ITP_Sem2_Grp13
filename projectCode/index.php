@@ -8,6 +8,15 @@
     include("includes/basicElements/header.php");
     include("includes/basicElements/navbar.php");
 
+    if (isset($_GET['page']) && $_GET['page'] === 'logout') {
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location: index.php?page=home");
+        exit();
+    }
+    
+
     switch($page){
         case "home":
             include("includes/sites/home.php");

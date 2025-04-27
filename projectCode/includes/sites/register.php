@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!-- HTML Teil -->
 <div class="container-fluid my-5" style="max-width:640px;">
-  <h2 class="text-center">Kundenregistrierung</h2>
+  <h2 class="text-center">Registrierung</h2>
 
   <?php if (!empty($error_msg)): ?>
     <div class="alert alert-danger"><?php echo $error_msg; ?></div>
@@ -108,15 +108,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="mb-3">
       <label for="email" class="form-label">E-Mail</label>
-      <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($email) ? $email : ''; ?>" required>
+      <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" value="<?php echo isset($email) ? $email : ''; ?>" required>
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Passwort</label>
-      <input type="password" class="form-control" id="password" name="password" required>
+      <input type="password" class="form-control" id="password" name="password" placeholder="******" required>
     </div>
     <div class="mb-3">
       <label for="password_confirm" class="form-label">Passwort bestätigen</label>
-      <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
+      <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="******" required>
     </div>
     <button type="submit" class="btn btn-primary">Registrieren</button>
   </form>
