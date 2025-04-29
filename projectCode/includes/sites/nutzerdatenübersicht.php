@@ -1,6 +1,6 @@
 <?php
-require_once 'config/dbaccess.php';
-require_once 'basicElements/session.php';
+//require_once 'config/dbaccess.php';
+//require_once '../basicElements/session.php';
 
 // Prüfen, ob der Benutzer eingeloggt ist
 if (!isset($_SESSION['benutzerID'])) {

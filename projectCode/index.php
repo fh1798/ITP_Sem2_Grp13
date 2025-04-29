@@ -34,11 +34,17 @@
             include("includes/sites/artikeldetailansicht.php");
             break;
         case "register":
-                include("includes/sites/register.php");
-                break;
+            include("includes/sites/register.php");
+            break;
         case "login":
-                    include("includes/sites/login.php");
-                    break;
+            include("includes/sites/login.php");
+            break;
+        case "warenkorb":
+            include("includes/sites/warenkorb.php");
+            break;
+        case "nutzerdaten":
+            include("includes/sites/nutzerdatenübersicht.php");
+            break;
         default:
             include("includes/sites/default.php");
             break;

@@ -18,12 +18,20 @@
         <li class="nav-item">
           <a class="nav-link <?php if($page === "artikelübersicht") echo "active"; ?>" href="index.php?page=artikelübersicht">Artikel</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link <?php if($page === "warenkorb") echo "active"; ?>" href="index.php?page=warenkorb">Warenkorb</a>
+        </li>
         <?php if(!isset($_SESSION['benutzerID'])): ?>
           <li class="nav-item">
             <a class="nav-link <?php if($page === "register") echo "active"; ?>" href="index.php?page=register">Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link <?php if($page === "login") echo "active"; ?>" href="index.php?page=login">Login</a>
+          </li>
+        <?php endif; ?>
+        <?php if(isset($_SESSION['benutzerID'])): ?>
+          <li class="nav-item">
+            <a class="nav-link <?php if($page === "nutzerdaten") echo "active"; ?>" href="index.php?page=nutzerdaten">Profil</a>
           </li>
         <?php endif; ?>
       </ul>
