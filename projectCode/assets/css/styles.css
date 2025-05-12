@@ -21,3 +21,51 @@
     text-decoration: none; /* Remove underline */
     color: inherit;        /* Inherit the color from the card */
 }
+
+#chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;     
+  height: auto;    
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: white;
+  object-fit: contain;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+#chatbot:hover {
+    border: solid rgb(75, 147, 255);
+}
+
+#chatWidget {
+  position: fixed;
+  bottom: 130px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  z-index: 1000;
+  border-radius: 12px;
+  display: none;
+}
+
+#chatWidget .card-body {
+  overflow-y: auto;
+  height: calc(100% - 112px); /* 56px = approx height of the header */
+}
+
+
+#bubbleIn {
+    background-color: aquamarine;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#bubbleOut {
+    background-color: rgb(127, 229, 255);
+    padding: 10px;
+    border-radius: 20px;
+}
