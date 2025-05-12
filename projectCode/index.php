@@ -7,6 +7,7 @@
 
     include("includes/basicElements/header.php");
     include("includes/basicElements/navbar.php");
+    include("includes/sites/chatbot.html");
 
     if (isset($_GET['page']) && $_GET['page'] === 'logout') {
         session_start();
