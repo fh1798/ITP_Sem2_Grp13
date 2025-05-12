@@ -2,8 +2,8 @@
 
 <?php
 # hardcoded Zugang zur lokalen Datenbank
-$servername = "localhost";
-//$servername = "127.0.0.1:3308";
+//$servername = "localhost";
+$servername = "127.0.0.1:3308";
 $username = "root";
 $password = "";
 $dbname = "itp_grp13";

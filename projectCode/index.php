@@ -39,6 +39,9 @@
         case "login":
             include("includes/sites/login.php");
             break;
+        case "chatroom":
+            include("includes/sites/chatroom.php");
+            break;
         case "warenkorb":
             include("includes/sites/warenkorb.php");
             break;
