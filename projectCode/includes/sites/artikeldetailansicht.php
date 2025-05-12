@@ -1,14 +1,16 @@
 <?php
-// Get um artikelID aus URL zu bekommen
+require_once(__DIR__ . '/../../config/dbaccess.php');
+
+// Artikel-ID aus URL
 $artikelID = isset($_GET['artikelID']) ? $_GET['artikelID'] : null;
 
-// Falls artikelId nicht exestiert
+// Falls keine ID übergeben wurde
 if (!$artikelID) {
     echo "Produkt nicht gefunden.";
     exit;
 }
 
-// Query für die Core-Artikel-Elemente
+// Artikel-Details auslesen
 $sql = "SELECT 
             a.artikelId, 
             a.name, 
@@ -29,34 +31,29 @@ $stmt = $db_obj->prepare($sql);
 $stmt->bind_param("i", $artikelID);
 $stmt->execute();
 $result = $stmt->get_result();
-
-// Fetch the product data
 $product = $result->fetch_assoc();
 
-// If the product doesn't exist, show an error message
 if (!$product) {
     header('Location: index.php?page=default');
+    exit;
 }
 
-// Eigene Query für duftnoten
+// Duftnoten auslesen
 $sqlNotes = "SELECT 
                 dn.name AS duftnoteName,
                 dn.typ AS duftnoteTyp
             FROM artikelduftnoten ad
             JOIN duftnote dn ON ad.duftnoteId = dn.duftnoteId
             WHERE ad.artikelId = ?";
-
 $stmtNotes = $db_obj->prepare($sqlNotes);
 $stmtNotes->bind_param("i", $artikelID);
 $stmtNotes->execute();
 $resultNotes = $stmtNotes->get_result();
 
-// Initialize duftnoten arrays
 $kopfnote = [];
 $herznote = [];
 $basisnote = [];
 
-// Fetch duftnoten
 while ($note = $resultNotes->fetch_assoc()) {
     if ($note['duftnoteTyp'] == 'Kopfnote') {
         $kopfnote[] = $note['duftnoteName'];
@@ -67,22 +64,19 @@ while ($note = $resultNotes->fetch_assoc()) {
     }
 }
 
-// Eigene Query für inhaltsstoffe
+// Inhaltsstoffe auslesen
 $sqlIngredients = "SELECT 
                     i.inhaltsstoff
                   FROM artikelinhaltsstoffe ai
                   JOIN inhaltsstoffe i ON ai.inhaltID = i.inhaltID
                   WHERE ai.artikelId = ?";
-
 $stmtIngredients = $db_obj->prepare($sqlIngredients);
 $stmtIngredients->bind_param("i", $artikelID);
 $stmtIngredients->execute();
 $resultIngredients = $stmtIngredients->get_result();
 
-// Initialize inhaltsstoffe array
 $ingredients = [];
 
-// Fetch all inhaltsstoffe
 while ($ingredient = $resultIngredients->fetch_assoc()) {
     $ingredients[] = $ingredient['inhaltsstoff'];
 }
@@ -98,13 +92,13 @@ while ($ingredient = $resultIngredients->fetch_assoc()) {
     </div>
 
     <div class="col-md-6">
-      <!-- Artikel Name und Beschreibung -->
+      <!-- Artikelname, Beschreibung -->
       <h2><?php echo htmlspecialchars($product['markeName']) . " - " . htmlspecialchars($product['name']); ?></h2>
       <p class="text-muted"><?php echo htmlspecialchars($product['beschreibung']); ?></p>
 
       <h4 class="text-success mb-3" id="price"><?php echo number_format($product['preisNetto'] * (1 + $product['steuersatz']), 2, ',', '.'); ?> € (inkl. MwSt.)</h4>
 
-      <!-- Tabs mit Inhaltbeschreibungen -->
+      <!-- Tabs -->
       <ul class="nav nav-tabs" id="productTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="produktdetails-tab" data-bs-toggle="tab" data-bs-target="#produktdetails" type="button" role="tab">Produktdetails</button>
@@ -118,11 +112,10 @@ while ($ingredient = $resultIngredients->fetch_assoc()) {
         <div class="tab-pane fade show active" id="produktdetails" role="tabpanel">
           <ul>
             <li><strong>Art-Nr.:</strong> <?php echo htmlspecialchars($product['artikelId']); ?></li>
-            <?php if (isset($product['ml']) && !empty($product['ml'])): ?>
+            <?php if (!empty($product['ml'])): ?>
               <li><strong>Inhalt:</strong> <?php echo htmlspecialchars($product['ml']); ?> ml</li>
             <?php endif; ?>
-            
-            <!-- Duftnoten -->
+
             <?php if (!empty($kopfnote)): ?>
               <li><strong>Kopfnote:</strong> <?php echo implode(', ', $kopfnote); ?></li>
             <?php endif; ?>
@@ -134,7 +127,7 @@ while ($ingredient = $resultIngredients->fetch_assoc()) {
             <?php endif; ?>
           </ul>
         </div>
-        <!-- Inhaltsstoffe -->
+
         <div class="tab-pane fade" id="inhaltsstoffe" role="tabpanel">
           <ul>
             <?php if (!empty($ingredients)): ?>
@@ -148,7 +141,14 @@ while ($ingredient = $resultIngredients->fetch_assoc()) {
         </div>
       </div>
 
-      <button class="btn btn-primary mt-4">In den Warenkorb</button>
+      <!-- In den Warenkorb Button mit Formular -->
+      <form action="index.php?page=warenkorb" method="POST">
+        <input type="hidden" name="addArtikelID" value="<?php echo htmlspecialchars($product['artikelId']); ?>">
+        <input type="hidden" name="menge" value="1">
+        <button type="submit" class="btn btn-primary mt-4">
+          In den Warenkorb
+        </button>
+      </form>
     </div>
   </div>
 </div>

@@ -17,8 +17,10 @@
         </li>
         <li class="nav-item">
             <a class="nav-link <?php if($page === "chatroom") echo "active"; ?>" href="index.php?page=chatroom">Chatroom</a>
-          </li>
-
+        </li>
+          <li class="nav-item">
+            <a class="nav-link <?php if($page === "warenkorb") echo "active"; ?>" href="index.php?page=warenkorb">Warenkorb</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link <?php if($page === "artikelübersicht") echo "active"; ?>" href="index.php?page=artikelübersicht">Artikel</a>
         </li>
