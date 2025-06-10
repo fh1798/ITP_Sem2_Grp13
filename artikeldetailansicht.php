@@ -1,6 +1,5 @@
-<?php
-session_start();
-require_once '../../dbaccess.php';
+artikeldetailansicht:  <?php
+
 
 $artikelID = isset($_GET['artikelID']) ? (int)$_GET['artikelID'] : null;
 
@@ -97,7 +96,7 @@ $anzahlLikes = $stmt->get_result()->fetch_assoc()['anzahl'];
 
             <?php if (isset($_SESSION['benutzerID'])): ?>
                 <form method="POST" class="mb-3">
-                    <button type="submit" name="likeAbsenden" class="btn btn-outline-danger">❤️ Artikel liken</button>
+                    <button type="submit" name="likeAbsenden" class="btn btn-outline-danger">❤ Artikel liken</button>
                 </form>
             <?php endif; ?>
 
@@ -172,5 +171,5 @@ $anzahlLikes = $stmt->get_result()->fetch_assoc()['anzahl'];
             </div>
 
         </div>
-    </div>
+           </div>
 </div>
