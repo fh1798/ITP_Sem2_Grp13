@@ -94,6 +94,7 @@
     overflow-y: auto;
     scroll-behavior: smooth;
 }
+
 /* CHATBOT */
 #chatbot {
   position: fixed;

@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["content"]) && isset($
 }
 ?>
 
-<div class="position-relative w-100 vh-100 chatroom-bg-image d-flex flex-column align-items-center justify-content-start p-3">
+<div class="position-relative w-100 min-vh-100 chatroom-bg-image d-flex flex-column align-items-center justify-content-start p-3">
     <!-- Blur Layer -->
     <div class="position-absolute top-0 start-0 w-100 h-100 backdrop-blur"></div>
 
