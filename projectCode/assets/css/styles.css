@@ -22,6 +22,79 @@
     color: inherit;        /* Inherit the color from the card */
 }
 
+/* CHATROOM */
+.chat-bubble {
+    max-width: 70%;
+    padding: 10px;
+    position: relative;
+    word-wrap: break-word;
+}
+
+.name-bubble {
+    font-size: 0.9rem;
+}
+
+.message-text {
+    padding: 5px 0;
+    font-size: 1rem;
+}
+
+.chatroom-bg-image {
+    background-image: url("../../assets/images/chatroom/chatroom_bg_2.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; 
+}
+
+.backdrop-blur {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.bg-selector {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+    background-size: cover;
+    background-position: center;
+
+    /* Washed-out effekt*/
+    filter: brightness(0.7) saturate(0.5);
+    transition: filter 0.3s ease;
+}
+
+.bg-selector:hover {
+    /* Zeigt original bild */
+    filter: brightness(1) saturate(1);
+}
+
+.bg-color-1 { background-image: url("../../assets/images/chatroom/chatroom_bg_1.jpg"); }
+.bg-color-2 { background-image: url("../../assets/images/chatroom/chatroom_bg_2.jpg"); }
+.bg-color-3 { background-image: url("../../assets/images/chatroom/chatroom_bg_3.jpg"); }
+.bg-color-4 { background-image: url("../../assets/images/chatroom/chatroom_bg_4.jpg"); }
+.bg-color-5 { background-image: url("../../assets/images/chatroom/chatroom_bg_5.jpg"); }
+
+.bg1 { background-image: url("../../assets/images/chatroom/chatroom_bg_1.jpg"); }
+.bg2 { background-image: url("../../assets/images/chatroom/chatroom_bg_2.jpg"); }
+.bg3 { background-image: url("../../assets/images/chatroom/chatroom_bg_3.jpg"); }
+.bg4 { background-image: url("../../assets/images/chatroom/chatroom_bg_4.jpg"); }
+.bg5 { background-image: url("../../assets/images/chatroom/chatroom_bg_5.jpg"); }
+
+#chat-box {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 600px;
+}
+
+#message-area {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+/* CHATBOT */
 #chatbot {
   position: fixed;
   bottom: 20px;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2025 at 07:51 PM
+-- Generation Time: Jun 16, 2025 at 02:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -96,6 +96,56 @@ INSERT INTO `artikelinhaltsstoffe` (`artikelID`, `inhaltID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `benutzer`
+--
+
+CREATE TABLE `benutzer` (
+  `benutzerID` int(11) NOT NULL,
+  `vorname` varchar(50) NOT NULL,
+  `nachname` varchar(50) NOT NULL,
+  `geschlecht` enum('Mann','Frau','Divers') NOT NULL,
+  `geburtsdatum` date NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `passwort` varchar(255) NOT NULL,
+  `role` enum('Benutzer','Admin') NOT NULL DEFAULT 'Benutzer',
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `benutzer`
+--
+
+INSERT INTO `benutzer` (`benutzerID`, `vorname`, `nachname`, `geschlecht`, `geburtsdatum`, `email`, `passwort`, `role`, `createdAt`) VALUES
+(1, 'lol', 'lol', 'Mann', '2025-05-01', 'lol@gmail.com', '$2y$10$VV8nkf5tq0WRiUAHGI.U2uL8Cmz6i1OFBeZjJqO1d7/CaI6falHii', 'Benutzer', '2025-04-27 11:45:21'),
+(2, 'Test', 'Test', 'Mann', '2000-01-01', 'test@mail.com', '$2y$10$kTUGxfdHbLZxMKUkKmwyZeeJOF7fKwGfxqVscdPyNv5.inqG0cQRa', 'Benutzer', '2025-05-09 09:45:01'),
+(3, 'dean', 'martin', 'Mann', '1946-04-10', 'martin@mail.com', '$2y$10$AUaqp7dJcnZHiWi8YkcbrODQRs./Fbwzg.Gq0RJZIzh0usFTv.zKG', 'Benutzer', '2025-05-12 12:30:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chatnachrichten`
+--
+
+CREATE TABLE `chatnachrichten` (
+  `id` int(11) NOT NULL,
+  `benutzer_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `artikelFK` int(11) DEFAULT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chatnachrichten`
+--
+
+INSERT INTO `chatnachrichten` (`id`, `benutzer_id`, `content`, `artikelFK`, `time`) VALUES
+(102, 2, 'Hey! I am looking for a new parfume, any recommendations?', NULL, '2025-06-16 12:12:58'),
+(103, 1, 'Hello! I really like this one:', 6, '2025-06-16 12:13:34'),
+(104, 2, 'Thanks for the tip!', NULL, '2025-06-16 12:14:04');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `duftnote`
 --
 
@@ -140,6 +190,32 @@ INSERT INTO `inhaltsstoffe` (`inhaltID`, `inhaltsstoff`) VALUES
 (18, 'Citronellol'),
 (19, 'Geraniol'),
 (20, 'Limonene');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kommentare`
+--
+
+CREATE TABLE `kommentare` (
+  `kommentarID` int(11) NOT NULL,
+  `benutzerID` int(11) NOT NULL,
+  `artikelID` int(11) NOT NULL,
+  `kommentar` text NOT NULL,
+  `erstellt_am` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `likeID` int(11) NOT NULL,
+  `benutzerID` int(11) NOT NULL,
+  `artikelID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -210,6 +286,20 @@ INSERT INTO `steuersatz` (`steuersatzID`, `steuersatz`) VALUES
 (2, 0.2),
 (3, 0.13);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warenkorb`
+--
+
+CREATE TABLE `warenkorb` (
+  `warenkorbID` int(11) NOT NULL,
+  `benutzerID` int(11) NOT NULL,
+  `artikelID` int(11) NOT NULL,
+  `menge` int(11) NOT NULL DEFAULT 1,
+  `hinzugefuegt_am` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -236,6 +326,20 @@ ALTER TABLE `artikelinhaltsstoffe`
   ADD KEY `inhaltID` (`inhaltID`);
 
 --
+-- Indexes for table `benutzer`
+--
+ALTER TABLE `benutzer`
+  ADD PRIMARY KEY (`benutzerID`);
+
+--
+-- Indexes for table `chatnachrichten`
+--
+ALTER TABLE `chatnachrichten`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `benutzer_id` (`benutzer_id`),
+  ADD KEY `fk_chatnachrichten_artikel` (`artikelFK`);
+
+--
 -- Indexes for table `duftnote`
 --
 ALTER TABLE `duftnote`
@@ -246,6 +350,19 @@ ALTER TABLE `duftnote`
 --
 ALTER TABLE `inhaltsstoffe`
   ADD PRIMARY KEY (`inhaltID`);
+
+--
+-- Indexes for table `kommentare`
+--
+ALTER TABLE `kommentare`
+  ADD PRIMARY KEY (`kommentarID`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`likeID`),
+  ADD UNIQUE KEY `benutzerID` (`benutzerID`,`artikelID`);
 
 --
 -- Indexes for table `marke`
@@ -268,6 +385,14 @@ ALTER TABLE `steuersatz`
   ADD PRIMARY KEY (`steuersatzID`);
 
 --
+-- Indexes for table `warenkorb`
+--
+ALTER TABLE `warenkorb`
+  ADD PRIMARY KEY (`warenkorbID`),
+  ADD KEY `benutzerID` (`benutzerID`),
+  ADD KEY `artikelID` (`artikelID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -276,6 +401,18 @@ ALTER TABLE `steuersatz`
 --
 ALTER TABLE `artikel`
   MODIFY `artikelID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `benutzer`
+--
+ALTER TABLE `benutzer`
+  MODIFY `benutzerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `chatnachrichten`
+--
+ALTER TABLE `chatnachrichten`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `duftnote`
@@ -288,6 +425,18 @@ ALTER TABLE `duftnote`
 --
 ALTER TABLE `inhaltsstoffe`
   MODIFY `inhaltID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `kommentare`
+--
+ALTER TABLE `kommentare`
+  MODIFY `kommentarID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `marke`
@@ -306,6 +455,12 @@ ALTER TABLE `preisliste`
 --
 ALTER TABLE `steuersatz`
   MODIFY `steuersatzID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `warenkorb`
+--
+ALTER TABLE `warenkorb`
+  MODIFY `warenkorbID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -332,23 +487,27 @@ ALTER TABLE `artikelinhaltsstoffe`
   ADD CONSTRAINT `artikelinhaltsstoffe_ibfk_2` FOREIGN KEY (`inhaltID`) REFERENCES `inhaltsstoffe` (`inhaltID`);
 
 --
+-- Constraints for table `chatnachrichten`
+--
+ALTER TABLE `chatnachrichten`
+  ADD CONSTRAINT `chatnachrichten_ibfk_1` FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`benutzerID`),
+  ADD CONSTRAINT `fk_chatnachrichten_artikel` FOREIGN KEY (`artikelFK`) REFERENCES `artikel` (`artikelID`);
+
+--
 -- Constraints for table `preisliste`
 --
 ALTER TABLE `preisliste`
   ADD CONSTRAINT `FKartID` FOREIGN KEY (`artikelID`) REFERENCES `artikel` (`artikelID`),
   ADD CONSTRAINT `fkTax` FOREIGN KEY (`steuersatzId`) REFERENCES `steuersatz` (`steuersatzID`);
+
+--
+-- Constraints for table `warenkorb`
+--
+ALTER TABLE `warenkorb`
+  ADD CONSTRAINT `warenkorb_ibfk_1` FOREIGN KEY (`benutzerID`) REFERENCES `benutzer` (`benutzerID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `warenkorb_ibfk_2` FOREIGN KEY (`artikelID`) REFERENCES `artikel` (`artikelID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
--- Tabelle für das Forum
-CREATE TABLE `forum` (
-    `forumID` INT AUTO_INCREMENT PRIMARY KEY,
-    `benutzerID` INT NOT NULL,
-    `content` TEXT NOT NULL,
-    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (`benutzerID`) REFERENCES `benutzer`(`benutzerID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
