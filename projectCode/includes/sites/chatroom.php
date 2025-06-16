@@ -28,9 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["content"]) && isset($
 
     <!-- Chat Content -->
     <div class="position-relative z-1 container-fluid pb-1">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-white mb-0"><b>CHATROOM</b></h2>
-        <div class="d-flex gap-2">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 text-center text-md-start">
+        <h2 class="text-white mb-3 mb-md-0"><b>CHATROOM</b></h2>
+        <div class="d-flex gap-2 justify-content-center justify-content-md-start">
             <div class="bg-selector bg-color-1" data-bg="bg1"></div>
             <div class="bg-selector bg-color-2" data-bg="bg2"></div>
             <div class="bg-selector bg-color-3" data-bg="bg3"></div>
