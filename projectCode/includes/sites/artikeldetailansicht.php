@@ -129,7 +129,13 @@ $anzahlLikes = $stmt->get_result()->fetch_assoc()['anzahl'];
                 </div>
             </div>
 
-            <button class="btn btn-primary mt-4">In den Warenkorb</button>
+            <form action="index.php?page=warenkorb" method="POST">
+                <input type="hidden" name="addArtikelID" value="<?php echo htmlspecialchars($product['artikelId']); ?>">
+                <input type="hidden" name="menge" value="1">
+                <button type="submit" class="btn btn-primary mt-4">
+                    In den Warenkorb
+                </button>
+            </form>
 
             <!-- Kommentarformular -->
             <div class="mt-5">
@@ -171,5 +177,5 @@ $anzahlLikes = $stmt->get_result()->fetch_assoc()['anzahl'];
             </div>
 
         </div>
-           </div>
+           </div>
 </div>
