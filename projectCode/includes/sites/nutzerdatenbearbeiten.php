@@ -1,7 +1,4 @@
 <?php
-require_once 'config/dbaccess.php';
-require_once 'basicElements/session.php';
-
 // Nur eingeloggte Benutzer dürfen hierhin
 if (!isset($_SESSION['benutzerID'])) {
     header("Location: index.php");

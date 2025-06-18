@@ -28,6 +28,15 @@
         case "impressum":
             include("includes/sites/impressum.php");
             break;
+        case "forum":
+            include("includes/sites/forum.php");
+            break;
+        case "nutzerübersicht":
+            include("includes/sites/nutzerdatenübersicht.php");
+            break;
+        case "nutzerbearbeitung":
+            include("includes/sites/nutzerdatenbearbeiten.php");
+            break;
         case "artikelübersicht":
             include("includes/sites/artikelübersicht.php");
             break;

@@ -16,6 +16,15 @@
           <a class="nav-link <?php if($page === "impressum") echo "active"; ?>" href="index.php?page=impressum">Impressum</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link <?php if($page === "forum") echo "active"; ?>" href="index.php?page=forum">Forum</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php if($page === "nutzerübersicht") echo "active"; ?>" href="index.php?page=nutzerübersicht">Nutzerübersicht</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php if($page === "nutzerbearbeitung") echo "active"; ?>" href="index.php?page=nutzerbearbeitung">Nutzerbearbeitung</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link <?php if($page === "chatroom") echo "active"; ?>" href="index.php?page=chatroom">Chatroom</a>
         </li>
           <li class="nav-item">
