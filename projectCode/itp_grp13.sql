@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 16, 2025 at 02:14 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Jun 18, 2025 at 04:26 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -117,7 +117,7 @@ CREATE TABLE `benutzer` (
 
 INSERT INTO `benutzer` (`benutzerID`, `vorname`, `nachname`, `geschlecht`, `geburtsdatum`, `email`, `passwort`, `role`, `createdAt`) VALUES
 (1, 'lol', 'lol', 'Mann', '2025-05-01', 'lol@gmail.com', '$2y$10$VV8nkf5tq0WRiUAHGI.U2uL8Cmz6i1OFBeZjJqO1d7/CaI6falHii', 'Benutzer', '2025-04-27 11:45:21'),
-(2, 'Test', 'Test', 'Mann', '2000-01-01', 'test@mail.com', '$2y$10$kTUGxfdHbLZxMKUkKmwyZeeJOF7fKwGfxqVscdPyNv5.inqG0cQRa', 'Benutzer', '2025-05-09 09:45:01'),
+(2, 'Test', 'Test', 'Mann', '2000-01-01', 'test@gmail.com', '$2y$10$kTUGxfdHbLZxMKUkKmwyZeeJOF7fKwGfxqVscdPyNv5.inqG0cQRa', 'Benutzer', '2025-05-09 09:45:01'),
 (3, 'dean', 'martin', 'Mann', '1946-04-10', 'martin@mail.com', '$2y$10$AUaqp7dJcnZHiWi8YkcbrODQRs./Fbwzg.Gq0RJZIzh0usFTv.zKG', 'Benutzer', '2025-05-12 12:30:18');
 
 -- --------------------------------------------------------
@@ -172,6 +172,26 @@ INSERT INTO `duftnote` (`duftnoteID`, `name`, `typ`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `forum`
+--
+
+CREATE TABLE `forum` (
+  `forumID` int(11) NOT NULL,
+  `benutzerID` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `forum`
+--
+
+INSERT INTO `forum` (`forumID`, `benutzerID`, `content`, `created_at`) VALUES
+(1, 1, 'test', '2025-06-18 16:06:58');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inhaltsstoffe`
 --
 
@@ -205,6 +225,14 @@ CREATE TABLE `kommentare` (
   `erstellt_am` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `kommentare`
+--
+
+INSERT INTO `kommentare` (`kommentarID`, `benutzerID`, `artikelID`, `kommentar`, `erstellt_am`) VALUES
+(1, 2, 3, 'super Duft!', '2025-06-18 16:19:08'),
+(2, 2, 3, 'another comment..', '2025-06-18 16:19:22');
+
 -- --------------------------------------------------------
 
 --
@@ -216,6 +244,15 @@ CREATE TABLE `likes` (
   `benutzerID` int(11) NOT NULL,
   `artikelID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`likeID`, `benutzerID`, `artikelID`) VALUES
+(6, 2, 3),
+(1, 2, 4),
+(2, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -346,6 +383,13 @@ ALTER TABLE `duftnote`
   ADD PRIMARY KEY (`duftnoteID`);
 
 --
+-- Indexes for table `forum`
+--
+ALTER TABLE `forum`
+  ADD PRIMARY KEY (`forumID`),
+  ADD KEY `benutzerID` (`benutzerID`);
+
+--
 -- Indexes for table `inhaltsstoffe`
 --
 ALTER TABLE `inhaltsstoffe`
@@ -421,6 +465,12 @@ ALTER TABLE `duftnote`
   MODIFY `duftnoteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `forum`
+--
+ALTER TABLE `forum`
+  MODIFY `forumID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `inhaltsstoffe`
 --
 ALTER TABLE `inhaltsstoffe`
@@ -430,13 +480,13 @@ ALTER TABLE `inhaltsstoffe`
 -- AUTO_INCREMENT for table `kommentare`
 --
 ALTER TABLE `kommentare`
-  MODIFY `kommentarID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kommentarID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `marke`
@@ -492,6 +542,12 @@ ALTER TABLE `artikelinhaltsstoffe`
 ALTER TABLE `chatnachrichten`
   ADD CONSTRAINT `chatnachrichten_ibfk_1` FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`benutzerID`),
   ADD CONSTRAINT `fk_chatnachrichten_artikel` FOREIGN KEY (`artikelFK`) REFERENCES `artikel` (`artikelID`);
+
+--
+-- Constraints for table `forum`
+--
+ALTER TABLE `forum`
+  ADD CONSTRAINT `forum_ibfk_1` FOREIGN KEY (`benutzerID`) REFERENCES `benutzer` (`benutzerID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `preisliste`
