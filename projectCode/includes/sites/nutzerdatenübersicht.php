@@ -25,22 +25,15 @@ if ($result->num_rows > 0) {
 $stmt->close();
 ?>
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Mein Profil</title>
-</head>
-<body>
-
-<h2>Mein Profil</h2>
-
-<p><strong>Vorname:</strong> <?php echo htmlspecialchars($user['vorname']); ?></p>
-<p><strong>Nachname:</strong> <?php echo htmlspecialchars($user['nachname']); ?></p>
-<p><strong>E-Mail:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
-<p><strong>Geschlecht:</strong> <?php echo htmlspecialchars($user['geschlecht']); ?></p>
-<p><strong>Geburtsdatum:</strong> <?php echo htmlspecialchars($user['geburtsdatum']); ?></p>
-
-</body>
-</html>
-
+<div class="container my-5 info-page" style="max-width: 700px;">
+  <h2 class="mb-4">👤 Mein Profil</h2>
+  <div class="card shadow">
+    <div class="card-body">
+      <p><strong>Vorname:</strong> <?php echo htmlspecialchars($user['vorname']); ?></p>
+      <p><strong>Nachname:</strong> <?php echo htmlspecialchars($user['nachname']); ?></p>
+      <p><strong>E-Mail:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+      <p><strong>Geschlecht:</strong> <?php echo htmlspecialchars($user['geschlecht']); ?></p>
+      <p><strong>Geburtsdatum:</strong> <?php echo htmlspecialchars($user['geburtsdatum']); ?></p>
+    </div>
+  </div>
+</div>
