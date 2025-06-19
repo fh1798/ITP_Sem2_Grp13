@@ -22,6 +22,9 @@
           <a class="nav-link <?php if($page === "nutzerübersicht") echo "active"; ?>" href="index.php?page=nutzerübersicht">Nutzerübersicht</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link <?php if($page === "artikelranking") echo "active"; ?>" href="index.php?page=artikelranking">Top 5 Perfumes</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link <?php if($page === "nutzerbearbeitung") echo "active"; ?>" href="index.php?page=nutzerbearbeitung">Nutzerbearbeitung</a>
         </li>
         <li class="nav-item">

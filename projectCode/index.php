@@ -43,6 +43,9 @@
         case "artikeldetailansicht":
             include("includes/sites/artikeldetailansicht.php");
             break;
+        case "artikelranking":
+            include("includes/sites/artikelranking.php");
+            break;
         case "register":
             include("includes/sites/register.php");
             break;
