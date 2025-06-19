@@ -19,13 +19,7 @@
           <a class="nav-link <?php if($page === "forum") echo "active"; ?>" href="index.php?page=forum">Forum</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?php if($page === "nutzerübersicht") echo "active"; ?>" href="index.php?page=nutzerübersicht">Nutzerübersicht</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link <?php if($page === "artikelranking") echo "active"; ?>" href="index.php?page=artikelranking">Top 5 Perfumes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?php if($page === "nutzerbearbeitung") echo "active"; ?>" href="index.php?page=nutzerbearbeitung">Nutzerbearbeitung</a>
         </li>
         <li class="nav-item">
             <a class="nav-link <?php if($page === "chatroom") echo "active"; ?>" href="index.php?page=chatroom">Chatroom</a>
@@ -36,6 +30,16 @@
         <li class="nav-item">
           <a class="nav-link <?php if($page === "artikelübersicht") echo "active"; ?>" href="index.php?page=artikelübersicht">Artikel</a>
         </li>
+
+        <?php if(isset($_SESSION['benutzerID'])): ?>
+  <li class="nav-item">
+    <a class="nav-link <?php if($page === "nutzerbearbeitung") echo "active"; ?>" href="index.php?page=nutzerbearbeitung">Nutzerbearbeitung</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?php if($page === "nutzerübersicht") echo "active"; ?>" href="index.php?page=nutzerübersicht">Nutzerübersicht</a>
+  </li>
+<?php endif; ?>
+
         <?php if(!isset($_SESSION['benutzerID'])): ?>
           <li class="nav-item">
             <a class="nav-link <?php if($page === "register") echo "active"; ?>" href="index.php?page=register">Register</a>
@@ -43,7 +47,6 @@
           <li class="nav-item">
             <a class="nav-link <?php if($page === "login") echo "active"; ?>" href="index.php?page=login">Login</a>
           </li>
-
         <?php endif; ?>
       </ul>
       <!-- Login/Logout Status -->
