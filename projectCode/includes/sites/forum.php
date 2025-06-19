@@ -1,14 +1,12 @@
 <?php
-require_once(__DIR__ . '/../../config/dbaccess.php');
-require_once(__DIR__ . '/../../config/session.php');
 
 // Zugriff nur für eingeloggte Nutzer
-if (!isset($_SESSION['benutzerID'])) {
-    header("Location: index.php");
+if (!isset($_SESSION["benutzerID"])) {
+    echo '<div class="container mt-5"><div class="alert alert-warning text-center">⚠️ Bitte loggen Sie sich ein, um das Forum nutzen zu können.</div></div>';
     exit();
 }
 
-// Beitrag speichern, wenn Formular gesendet
+// Beitrag speichern
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['content'])) {
     $content = trim($_POST['content']);
     $benutzerID = $_SESSION['benutzerID'];
@@ -28,28 +26,34 @@ $sql = "SELECT forum.content, forum.created_at, benutzer.vorname, benutzer.nachn
 $result = $db_obj->query($sql);
 ?>
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Forum</title>
-</head>
-<body>
-    <h2>Forum (nur für eingeloggte Benutzer)</h2>
 
-    <form method="POST">
-        <textarea name="content" rows="4" cols="50" placeholder="Dein Beitrag..." required></textarea><br>
-        <button type="submit">Beitrag posten</button>
-    </form>
+<div class="container my-5 info-page" style="max-width: 800px;">
+  <h2 class="mb-4">💬 Forum</h2>
 
-    <hr>
+  <!-- Formular zum Posten -->
+  <form method="POST" class="card p-4 shadow-sm mb-5">
+    <div class="mb-3">
+      <label for="content" class="form-label fw-bold">Neuer Beitrag:</label>
+      <textarea name="content" id="content" rows="4" class="form-control" placeholder="Dein Beitrag..." required></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Beitrag posten</button>
+  </form>
 
-    <h3>Alle Beiträge:</h3>
-    <?php while ($row = $result->fetch_assoc()): ?>
-        <p><strong><?php echo htmlspecialchars($row['vorname'] . ' ' . $row['nachname']); ?></strong> schrieb am 
-           <?php echo $row['created_at']; ?>:</p>
-        <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
-        <hr>
-    <?php endwhile; ?>
-</body>
-</html>
+  <!-- Beiträge anzeigen -->
+  <div class="card p-4 shadow-sm">
+    <h4 class="mb-3">📚 Alle Beiträge</h4>
+    <?php if ($result->num_rows > 0): ?>
+      <?php while ($row = $result->fetch_assoc()): ?>
+        <div class="mb-4 border-bottom pb-3">
+          <p class="mb-1">
+            <strong><?php echo htmlspecialchars($row['vorname'] . ' ' . $row['nachname']); ?></strong>
+            <span class="text-muted">am <?php echo $row['created_at']; ?></span>
+          </p>
+          <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
+        </div>
+      <?php endwhile; ?>
+    <?php else: ?>
+      <p class="text-muted">Noch keine Beiträge vorhanden.</p>
+    <?php endif; ?>
+  </div>
+</div>
