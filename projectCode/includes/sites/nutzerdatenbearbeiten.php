@@ -45,34 +45,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Profil bearbeiten</title>
-</head>
-<body>
-    <h2>Profil bearbeiten</h2>
+<div class="container my-5 info-page" style="max-width: 700px;">
+  <h2 class="mb-4">✏️ Profil bearbeiten</h2>
 
-    <?php if (!empty($error_msg)): ?>
-        <p style="color:red;"><?php echo $error_msg; ?></p>
-    <?php endif; ?>
+  <?php if (!empty($error_msg)): ?>
+    <div class="alert alert-danger"><?php echo $error_msg; ?></div>
+  <?php endif; ?>
 
-    <?php if (!empty($success_msg)): ?>
-        <p style="color:green;"><?php echo $success_msg; ?></p>
-    <?php endif; ?>
+  <?php if (!empty($success_msg)): ?>
+    <div class="alert alert-success"><?php echo $success_msg; ?></div>
+  <?php endif; ?>
 
-    <form method="POST">
-        <label for="email">Neue E-Mail-Adresse:</label><br>
-        <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($_SESSION['email']); ?>" required><br><br>
+<form method="POST" class="card p-4 shadow">
+  <div class="mb-3">
+    <label for="email" class="form-label fw-bold">Neue E-Mail-Adresse:</label>
+    <input type="email" class="form-control" id="email" name="email"
+           value="<?php echo htmlspecialchars($_SESSION['email']); ?>" required>
+  </div>
 
-        <label for="passwort">Neues Passwort (optional):</label><br>
-        <input type="password" name="passwort" id="passwort"><br><br>
+  <div class="mb-3">
+    <label for="passwort" class="form-label fw-bold">Neues Passwort:</label>
+    <input type="password" class="form-control" id="passwort" name="passwort">
+  </div>
 
-        <label for="passwort_bestaetigen">Passwort bestätigen:</label><br>
-        <input type="password" name="passwort_bestaetigen" id="passwort_bestaetigen"><br><br>
+  <div class="mb-3">
+    <label for="passwort_bestaetigen" class="form-label fw-bold">Passwort bestätigen:</label>
+    <input type="password" class="form-control" id="passwort_bestaetigen" name="passwort_bestaetigen">
+  </div>
 
-        <button type="submit">Aktualisieren</button>
-    </form>
-</body>
-</html>
+  <button type="submit" class="btn btn-primary">Änderungen speichern</button>
+</form>
+
+</div>
