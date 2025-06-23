@@ -61,6 +61,9 @@
         case "nutzerdaten":
             include("includes/sites/nutzerdatenübersicht.php");
             break;
+        case "checkout":
+            include("includes/sites/checkout.php");
+            break;
         default:
             include("includes/sites/default.php");
             break;

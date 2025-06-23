@@ -96,6 +96,6 @@ $gesamt = 0;
 
   <div class="text-end mt-4">
     <h4>Gesamtpreis: <strong><?php echo number_format($gesamt, 2); ?> €</strong></h4>
-    <button class="btn btn-success btn-lg mt-3">Zur Kasse</button>
+    <a href="index.php?page=checkout" class="btn btn-success btn-lg mt-3">Zur Kasse</a>
   </div>
 </div>
